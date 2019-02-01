@@ -14,8 +14,23 @@ class TenantsController extends Controller
      */
     public function index()
     {
-        $tenants = Tenant::orderBy('name','asc')->paginate(50);
-        return view('tenants.index')->with('tenants',$tenants);
+        //group by category
+        //$tenants = Tenant::selectRaw('count(*) AS cnt, category')->groupBy('category')->orderBy('category','asc')->limit(5)->paginate(50);
+
+        //group by zone
+        //$tenants = Tenant::selectRaw('count(*) AS cnt, zone')->groupBy('zone')->orderBy('cnt','desc')->limit(5)->paginate(50);
+
+        //group by floor
+        //$tenants = Tenant::selectRaw('count(*) AS cnt, floor')->groupBy('floor')->orderBy('cnt','desc')->limit(5)->paginate(50);
+        
+        //nothing is group
+
+        $tenants = Tenant::orderBy('name')->paginate(50);
+        $data = array(
+            'tenants' => $tenants,
+            'type' => 'name',
+        );
+        return view('tenants.index')->with($data);
     }
 
     /**
