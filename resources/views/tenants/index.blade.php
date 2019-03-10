@@ -7,7 +7,7 @@
         @if(count($tenants)>0)
             @foreach($tenants as $tenant)
                 <div class="well">
-                    <h3><a href="/test/public/tenants/{{$tenant->id}}">{{$tenant->name}}</a></h3>
+                    <h3><a href="tenants/{{$tenant->id}}">{{$tenant->name}}</a></h3>
                     <small>Category: {{$tenant->category}}</small>
                 </div>
             @endforeach
@@ -20,7 +20,7 @@
         @if(count($categories)>0)
             @foreach($categories as $category)
                 <div class="well">
-                    <h3><a href="/test/public/category/{{$category->category}}">{{$category->category}}</a></h3>
+                    <h3><a href="category/{{$category->category}}">{{$category->category}}</a></h3>
                 </div>
             @endforeach
             {{$categories->links()}}
@@ -32,7 +32,7 @@
         @if(count($floors)>0)
             @foreach($floors as $floor)
                 <div class="well">
-                    <h3><a href="/test/public/floor/{{$floor->floor}}">{{$floor->floor}}</a></h3>
+                    <h3><a href="floor/{{$floor->floor}}">{{$floor->floor}}</a></h3>
                 </div>
             @endforeach
             {{$floors->links()}}
@@ -44,7 +44,7 @@
         @if(count($zones)>0)
             @foreach($zones as $zone)
                 <div class="well">
-                    <h3><a href="/test/public/zone/{{$zone->zone}}">{{$zone->zone}}</a></h3>
+                    <h3><a href="zone/{{$zone->zone}}">{{$zone->zone}}</a></h3>
                 </div>
             @endforeach
             {{$zones->links()}}

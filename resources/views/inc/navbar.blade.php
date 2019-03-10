@@ -23,13 +23,13 @@
             </ul>
 
             <ul class="nav navbar-nav">
-                <li><a href="/test/public">Home</a></li>
-                <li><a href="/test/public/tenants">Tenants</a></li>
-                <li><a href="/test/public/category">Category</a></li>
-                <li><a href="/test/public/floor">Floor</a></li>
-                <li><a href="/test/public/zone">Zone</a></li>
-                <li><a href="/test/public/about">About</a></li>
-                <li><a href="/test/public/contact">Contact</a></li>
+                <li><a href="/TenantWebApp/public">Home</a></li>
+                <li><a href="/TenantWebApp/public/tenants">Tenants</a></li>
+                <li><a href="/TenantWebApp/public/category">Category</a></li>
+                <li><a href="/TenantWebApp/public/floor">Floor</a></li>
+                <li><a href="/TenantWebApp/public/zone">Zone</a></li>
+                <li><a href="/TenantWebApp/public/about">About</a></li>
+                <li><a href="/TenantWebApp/public/contact">Contact</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
