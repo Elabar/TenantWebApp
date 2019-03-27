@@ -60,7 +60,7 @@
                                 </form>
                             </li>
                             <li>
-                                <a href="home">Dashboard</a>
+                                <a href="/home">Dashboard</a>
                             </li>
                         </ul>
                     </li>

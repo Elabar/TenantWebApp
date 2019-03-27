@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tenant;
 
 class PagesController extends Controller
 {
@@ -25,5 +26,14 @@ class PagesController extends Controller
     public function about(){
         $title = 'Mega Mall';
         return view('pages.about')->with('title',$title);
+    }
+
+    public function dashboard(){
+
+        $data = [
+            'tenants' => Tenant::orderBy('name')->paginate(50),
+            'title' => "All Tenants"
+        ];
+        return view('home')->with($data);
     }
 }

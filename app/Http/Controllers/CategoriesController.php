@@ -30,6 +30,7 @@ class CategoriesController extends Controller
     public function create()
     {
         //
+        return view('categories.create');
     }
 
     /**
@@ -41,6 +42,17 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+        
+        $category = new Category;
+        $category->name = $request->input('name');
+        $category->description = $request->input('description');
+        $category->save();
+
+        return redirect('/home')->with('success','Category Created');
     }
 
     /**

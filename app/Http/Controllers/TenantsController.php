@@ -24,7 +24,6 @@ class TenantsController extends Controller
         ];
 
         return view('tenants.index')->with($data);
-        
     }
 
     /**
@@ -35,6 +34,17 @@ class TenantsController extends Controller
     public function create()
     {
         //
+        
+        $data = [
+            'zones' => Zone::orderBy('name')->get(),
+            'floors' => Floor::orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get()
+        ];
+        
+
+        //$data = Zone::orderBy('name')->get();
+        return view('tenants.create')->with($data);
+        //return $data;
     }
 
     /**
@@ -46,6 +56,22 @@ class TenantsController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => 'required',
+            'lotNumber' => 'required',
+            'description' => 'required'
+        ]);
+        
+        $tenant = new Tenant;
+        $tenant->name = $request->input('name');
+        $tenant->zoneID = $request->input('zoneID');
+        $tenant->floorID = $request->input('floorID');
+        $tenant->lotNumber = $request->input('lotNumber');
+        $tenant->categoryID = $request->input('categoryID');
+        $tenant->description = $request->input('description');
+        $tenant->save();
+
+        return redirect('/tenants')->with('success','Tenant Created');
     }
 
     /**
@@ -77,6 +103,15 @@ class TenantsController extends Controller
     public function edit($id)
     {
         //
+        $tenant = Tenant::find($id);
+
+        $data = [
+            'tenant' => Tenant::find($id),
+            'zones' => Zone::orderBy('name')->get(),
+            'floors' => Floor::orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get()
+        ];
+        return view('tenants.edit')->with($data);
     }
 
     /**
@@ -89,6 +124,22 @@ class TenantsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'name' => 'required',
+            'lotNumber' => 'required',
+            'description' => 'required'
+        ]);
+        
+        $tenant = Tenant::find($id);
+        $tenant->name = $request->input('name');
+        $tenant->zoneID = $request->input('zoneID');
+        $tenant->floorID = $request->input('floorID');
+        $tenant->lotNumber = $request->input('lotNumber');
+        $tenant->categoryID = $request->input('categoryID');
+        $tenant->description = $request->input('description');
+        $tenant->save();
+
+        return redirect('/tenants')->with('success','Tenant details Updated');
     }
 
     /**
@@ -100,5 +151,20 @@ class TenantsController extends Controller
     public function destroy($id)
     {
         //
+        $tenant = Tenant::find($id);
+        $tenant->delete();
+        return redirect('/tenants')->with('success','Tenant deleted');
+    }
+
+    /*
+     * Specialy craft function for destroy in dashboard so
+     * it will redirect back to dashboard
+    */
+    public function destroyInDashboard($id)
+    {
+        //
+        $tenant = Tenant::find($id);
+        $tenant->delete();
+        return redirect('/home')->with('success','Tenant deleted');
     }
 }

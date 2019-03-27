@@ -26,3 +26,5 @@ Route::resource('zones','ZonesController');
 Route::resource('categories','CategoriesController');
 
 Auth::routes();
+
+Route::get('/home', 'PagesController@dashboard');
