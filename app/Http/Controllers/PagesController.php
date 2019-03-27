@@ -12,4 +12,18 @@ class PagesController extends Controller
         $title = 'Mega Mall';
         return view('pages.index')->with('title',$title);
     }
+
+    public function contact(){
+        $data = [
+            'title' => 'Contact',
+            'contacts' => ['018-9457868','leehoemun@gmail.com','@LeeLhm123']
+        ];
+        
+        return view('pages.contact')->with($data);
+    }
+
+    public function about(){
+        $title = 'Mega Mall';
+        return view('pages.about')->with('title',$title);
+    }
 }

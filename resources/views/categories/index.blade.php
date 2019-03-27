@@ -2,17 +2,17 @@
 
 @section('content')
  
-    <h3>Tenants at {{$category}}</h3>
-    @if(count($tenants)>0)
-        @foreach($tenants as $tenant)
+    <h3>Categories</h3>
+    @if(count($categories)>0)
+        @foreach($categories as $category)
             <div class="well">
-                <h3><a href="../../public/tenants/{{$tenant->id}}">{{$tenant->name}}</a></h3>
-                <small>Category: {{$tenant->category}}</small>
+                <h3><a href="categories/{{$category->id}}">{{$category->name}}</a></h3>
+                <p>{{$category->description}}</p>
             </div>
         @endforeach
-        {{$tenants->links()}}
+        {{$categories->links()}}
     @else
-        <p>No tenant records</p>
+        <p>No category records</p>
     @endif
 
 @endsection

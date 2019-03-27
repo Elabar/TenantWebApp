@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tenant;
+use App\Zone;
+use App\Floor;
+use App\Category;
 
 class TenantsController extends Controller
 {
@@ -15,6 +18,13 @@ class TenantsController extends Controller
     public function index()
     {
         //
+        $data = [
+            'tenants' => Tenant::orderBy('name')->paginate(50),
+            'title' => "All Tenants"
+        ];
+
+        return view('tenants.index')->with($data);
+        
     }
 
     /**
@@ -47,6 +57,15 @@ class TenantsController extends Controller
     public function show($id)
     {
         //
+        $tenant = Tenant::find($id);
+        $data = [
+            'tenant' => Tenant::find($id),
+            'zoneName' => Zone::find($tenant->zoneID)->name,
+            'floorName' => Floor::find($tenant->floorID)->name,
+            'categoryName' => Category::find($tenant->categoryID)->name
+        ];
+        return view('tenants.show')->with($data);
+        //return $data;
     }
 
     /**

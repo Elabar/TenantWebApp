@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Tenant;
 
 class CategoriesController extends Controller
 {
@@ -15,6 +16,10 @@ class CategoriesController extends Controller
     public function index()
     {
         //
+        $categories = Category::orderBy('name')->paginate(50);
+
+        return view('categories.index')->with('categories',$categories);
+        //return $categories;
     }
 
     /**
@@ -47,6 +52,16 @@ class CategoriesController extends Controller
     public function show($id)
     {
         //
+        //$tenants = Tenant::where('categoryID',$id)->orderBy('name')->paginate(50);
+
+        $categoryName = Category::find($id)->name;
+
+        $data = [
+            'tenants' => Tenant::where('categoryID',$id)->orderBy('name')->paginate(50),
+            'title' => 'Tenants in ' . $categoryName
+        ];
+
+        return view('tenants.index')->with($data);
     }
 
     /**

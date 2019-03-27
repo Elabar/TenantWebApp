@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Floor;
+use App\Tenant;
 
 class FloorsController extends Controller
 {
@@ -15,6 +16,9 @@ class FloorsController extends Controller
     public function index()
     {
         //
+        $floors = Floor::orderBy('name')->paginate(50);
+
+        return view('floors.index')->with('floors',$floors);
     }
 
     /**
@@ -47,6 +51,16 @@ class FloorsController extends Controller
     public function show($id)
     {
         //
+        //$tenants = Tenant::where('floorID',$id)->orderBy('name')->paginate(50);
+
+        $floorName = Floor::find($id)->name;
+
+        $data = [
+            'tenants' => Tenant::where('zoneID',$id)->orderBy('name')->paginate(50),
+            'title' => 'Tenants in ' . $floorName . ' floor'
+        ];
+
+        return view('tenants.index')->with($data);
     }
 
     /**

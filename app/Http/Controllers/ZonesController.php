@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Zone;
+use App\Tenant;
 
 class ZonesController extends Controller
 {
@@ -15,6 +16,9 @@ class ZonesController extends Controller
     public function index()
     {
         //
+        $zones = Zone::orderBy('name')->paginate(50);
+
+        return view('zones.index')->with('zones',$zones);
     }
 
     /**
@@ -47,6 +51,16 @@ class ZonesController extends Controller
     public function show($id)
     {
         //
+        //$tenants = Tenant::where('zoneID',$id)->orderBy('name')->paginate(50);
+
+        $zoneName = Zone::find($id)->name;
+
+        $data = [
+            'tenants' => Tenant::where('zoneID',$id)->orderBy('name')->paginate(50),
+            'title' => 'Tenants in Zone ' . $zoneName
+        ];
+
+        return view('tenants.index')->with($data);
     }
 
     /**

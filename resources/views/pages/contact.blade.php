@@ -2,10 +2,10 @@
 
 @section('content')
     <h1>{{$title}}</h1>
-    @if(count($services)>0)
+    @if(count($contacts)>0)
         <ul class = "list-group">
-        @foreach($services as $service)
-            <li class = "list-group-item">{{$service}}</li> 
+        @foreach($contacts as $contact)
+            <li class = "list-group-item">{{$contact}}</li> 
         @endforeach
         </ul>
     @endif
