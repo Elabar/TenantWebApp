@@ -25,10 +25,10 @@ class CreateTenantsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('tenants',function (Blueprint $table){
-            $table->foreign('zoneID')->references('id')->on('zones');
-            $table->foreign('floorID')->references('id')->on('floors');
-            $table->foreign('categoryID')->references('id')->on('categories');
+        Schema::table('tenants', function (Blueprint $table) {
+            $table->foreign('zoneID')->references('id')->on('zones')->onDelete('cascade');
+            $table->foreign('floorID')->references('id')->on('floors')->onDelete('cascade');
+            $table->foreign('categoryID')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

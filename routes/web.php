@@ -11,7 +11,7 @@
 |
 */
 
-//Route::get('/', function(){return "asd";});
+Route::get('/', function(){return "asd";});
 
 Route::resource('tenants','TenantsController');
 
