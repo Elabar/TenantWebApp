@@ -19,11 +19,11 @@ Route::get('/about', 'PagesController@about');
 
 Route::resource('tenants','TenantsController');
 
-Route::resource('floors','FloorsController');
+Route::resource('floors','FloorsController',['only' => ['index','show']]);
 
-Route::resource('zones','ZonesController');
+Route::resource('zones','ZonesController',['only' => ['index','show']]);
 
-Route::resource('categories','CategoriesController');
+Route::resource('categories','CategoriesController',['only' => ['index','show','store','create']]);
 
 Auth::routes();
 
