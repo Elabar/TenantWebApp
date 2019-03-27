@@ -11,27 +11,13 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
-
-Route::get('/about', 'PagesController@about');
-
-//Route::get('/tenants', 'PagesController@tenants');
-
-Route::get('/floor', 'PagesController@floor');
-
-Route::get('/floor/{floor}', 'PagesController@floorT');
-
-Route::get('/zone', 'PagesController@zone');
-
-Route::get('/zone/{zone}', 'PagesController@zoneT');
-
-Route::get('/category', 'PagesController@category');
-
-Route::get('/category/{category}','PagesController@categoryT');
-
-Route::get('/contact', 'PagesController@contact');
+//Route::get('/', function(){return "asd";});
 
 Route::resource('tenants','TenantsController');
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('floors','FloorsController');
+
+Route::resource('zones','ZonesController');
+
+Route::resource('categories','CategoriesController');
+

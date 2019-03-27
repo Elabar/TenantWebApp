@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Tenant;
+use App\Category;
 
-class TenantsController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
