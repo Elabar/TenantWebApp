@@ -2,35 +2,51 @@
 
 @section('content')
     <h1>Create Tenant</h1>
-    {!! Form::open(['action' => 'TenantsController@store','method' => 'TENANT' ]) !!}
+    {!! Form::open(['action' => 'TenantsController@store','method' => 'POST' ]) !!}
         <div class="form-group">
             {{Form::label('name','Name')}}
             <br>
-            {{Form::text('name','', ['class'=> 'from-control','placeholder' =>'Samsung'])}}
+            <input type='text' class='form-control' name='name'>
+        </div>
+
+        <div class="form-group">
+            {{Form::label('lotNumber','Lot Number')}}
+            <br>
+            <input type='text' class='form-control' name='lotNumber'>
+        </div>
+
+        <div class="form-group">
+            {{Form::label('description','Description')}}
+            <br>
+            <textarea class='form-control' rows='5' name='description'></textarea>
         </div>
 
         <div class="form-group">
             {{Form::label('zone','Zone')}}
-            <br>
-            {{Form::text('zone','', ['class'=> 'from-control','placeholder' =>'Asian Arena'])}}
+            <select id='zoneID' name='zoneID' class='form-control'>
+            @foreach($zones as $zone)
+                <option value={{$zone->id}}>{{$zone->name}}</option>
+            @endforeach
+            </select>
         </div>
-        
+
         <div class="form-group">
             {{Form::label('floor','Floor')}}
-            <br>
-            {{Form::text('floor','', ['class'=> 'from-control','placeholder' =>'3A'])}}
+            <select id='floorID' name='floorID' class='form-control'>
+            @foreach($floors as $floor)
+                <option value={{$floor->id}}>{{$floor->name}}</option>
+            @endforeach
+            </select>
         </div>
     
         <div class="form-group">
-            {{Form::label('lot_num','Lot Number')}}
-            <br>
-            {{Form::text('lot_num','', ['class'=> 'from-control','placeholder' =>'101-A'])}}
-        </div>
-        
-        <div class="form-group">
             {{Form::label('category','Category')}}
-            <br>
-            {{Form::text('category','', ['class'=> 'from-control','placeholder' =>'Beverage'])}}
+            <select id='categoryID' name='categoryID' class='form-control'>
+            @foreach($categories as $category)
+                <option value={{$category->id}}>{{$category->name}}</option>
+            @endforeach
+            </select>
+            <p>If the category is not found, click <a href="/categories/create">here</a> to add a new category</p>
         </div>
         {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
     {!! Form::close() !!}

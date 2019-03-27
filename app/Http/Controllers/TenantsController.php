@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tenant;
+use App\Zone;
+use App\Floor;
+use App\Category;
 
 class TenantsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['store', 'create', 'destroy', 'update' , 'edit']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,22 +22,12 @@ class TenantsController extends Controller
      */
     public function index()
     {
-        //group by category
-        //$tenants = Tenant::selectRaw('count(*) AS cnt, category')->groupBy('category')->orderBy('category','asc')->limit(5)->paginate(50);
+        //
+        $data = [
+            'tenants' => Tenant::orderBy('name')->paginate(50),
+            'title' => "All Tenants"
+        ];
 
-        //group by zone
-        //$tenants = Tenant::selectRaw('count(*) AS cnt, zone')->groupBy('zone')->orderBy('cnt','desc')->limit(5)->paginate(50);
-
-        //group by floor
-        //$tenants = Tenant::selectRaw('count(*) AS cnt, floor')->groupBy('floor')->orderBy('cnt','desc')->limit(5)->paginate(50);
-        
-        //nothing is group
-
-        $tenants = Tenant::orderBy('name')->paginate(50);
-        $data = array(
-            'tenants' => $tenants,
-            'type' => 'name',
-        );
         return view('tenants.index')->with($data);
     }
 
@@ -40,7 +38,18 @@ class TenantsController extends Controller
      */
     public function create()
     {
-        return view('tenants.create');
+        //
+        
+        $data = [
+            'zones' => Zone::orderBy('name')->get(),
+            'floors' => Floor::orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get()
+        ];
+        
+
+        //$data = Zone::orderBy('name')->get();
+        return view('tenants.create')->with($data);
+        //return $data;
     }
 
     /**
@@ -51,21 +60,20 @@ class TenantsController extends Controller
      */
     public function store(Request $request)
     {
+        //
         $this->validate($request, [
             'name' => 'required',
-            'zone' => 'required',
-            'floor' => 'required',
-            'lot_num' => 'required',
-            'category' => 'required',
+            'lotNumber' => 'required',
+            'description' => 'required'
         ]);
-
         
         $tenant = new Tenant;
         $tenant->name = $request->input('name');
-        $tenant->zone = $request->input('zone');
-        $tenant->floor = $request->input('floor');
-        $tenant->lot_num = $request->input('lot_num');
-        $tenant->category = $request->input('category');
+        $tenant->zoneID = $request->input('zoneID');
+        $tenant->floorID = $request->input('floorID');
+        $tenant->lotNumber = $request->input('lotNumber');
+        $tenant->categoryID = $request->input('categoryID');
+        $tenant->description = $request->input('description');
         $tenant->save();
 
         return redirect('/tenants')->with('success','Tenant Created');
@@ -79,8 +87,16 @@ class TenantsController extends Controller
      */
     public function show($id)
     {
+        //
         $tenant = Tenant::find($id);
-        return view('tenants.show')->with('tenant',$tenant);
+        $data = [
+            'tenant' => Tenant::find($id),
+            'zoneName' => Zone::find($tenant->zoneID)->name,
+            'floorName' => Floor::find($tenant->floorID)->name,
+            'categoryName' => Category::find($tenant->categoryID)->name
+        ];
+        return view('tenants.show')->with($data);
+        //return $data;
     }
 
     /**
@@ -91,8 +107,16 @@ class TenantsController extends Controller
      */
     public function edit($id)
     {
+        //
         $tenant = Tenant::find($id);
-        return view('tenants.edit')->with('tenant',$tenant);
+
+        $data = [
+            'tenant' => Tenant::find($id),
+            'zones' => Zone::orderBy('name')->get(),
+            'floors' => Floor::orderBy('name')->get(),
+            'categories' => Category::orderBy('name')->get()
+        ];
+        return view('tenants.edit')->with($data);
     }
 
     /**
@@ -104,21 +128,20 @@ class TenantsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //
         $this->validate($request, [
             'name' => 'required',
-            'zone' => 'required',
-            'floor' => 'required',
-            'lot_num' => 'required',
-            'category' => 'required',
+            'lotNumber' => 'required',
+            'description' => 'required'
         ]);
-
         
         $tenant = Tenant::find($id);
         $tenant->name = $request->input('name');
-        $tenant->zone = $request->input('zone');
-        $tenant->floor = $request->input('floor');
-        $tenant->lot_num = $request->input('lot_num');
-        $tenant->category = $request->input('category');
+        $tenant->zoneID = $request->input('zoneID');
+        $tenant->floorID = $request->input('floorID');
+        $tenant->lotNumber = $request->input('lotNumber');
+        $tenant->categoryID = $request->input('categoryID');
+        $tenant->description = $request->input('description');
         $tenant->save();
 
         return redirect('/tenants')->with('success','Tenant details Updated');
@@ -132,9 +155,21 @@ class TenantsController extends Controller
      */
     public function destroy($id)
     {
+        //
         $tenant = Tenant::find($id);
         $tenant->delete();
-
         return redirect('/tenants')->with('success','Tenant deleted');
+    }
+
+    /*
+     * Specialy craft function for destroy in dashboard so
+     * it will redirect back to dashboard
+    */
+    public function destroyInDashboard($id)
+    {
+        //
+        $tenant = Tenant::find($id);
+        $tenant->delete();
+        return redirect('/home')->with('success','Tenant deleted');
     }
 }

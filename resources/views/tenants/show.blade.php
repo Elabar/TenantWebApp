@@ -5,9 +5,9 @@
     <h1>{{$tenant->name}}</h1>
     <small>Updated on {{$tenant->updated_at}}</small>
     <div>
-        We are located at {{$tenant->zone}},{{$tenant->floor}} floor and our lot number is {{$tenant->lot_num}}.
+        We are located at {{$zoneName}},{{$floorName}} floor and our lot number is {{$tenant->lotNumber}}.
         <br>
-        We sell tons of {{$tenant->category}}.
+        We sell tons of {{$categoryName}}.
     </div>
 
     

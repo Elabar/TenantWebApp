@@ -9,6 +9,7 @@
 
                 <div class="panel-body">
                     <a href="tenants/create" class="btn btn-primary">Create Tenant</a>
+                    <a href="categories/create" class="btn btn-primary">Create Category</a>
                     
                     @if(count($tenants) > 0)
                     <h3>Created tenant</h3>
