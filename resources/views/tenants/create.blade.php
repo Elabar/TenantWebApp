@@ -46,6 +46,7 @@
                 <option value={{$category->id}}>{{$category->name}}</option>
             @endforeach
             </select>
+            <p>If the category is not found, click <a href="/categories/create">here</a> to add a new category</p>
         </div>
         {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
     {!! Form::close() !!}

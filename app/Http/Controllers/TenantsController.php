@@ -10,6 +10,11 @@ use App\Category;
 
 class TenantsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['store', 'create', 'destroy', 'update' , 'edit']]);
+    }
     /**
      * Display a listing of the resource.
      *
