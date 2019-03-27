@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function(){return "asd";});
+Route::get('/', 'PagesController@home');
 
 Route::resource('tenants','TenantsController');
 
@@ -21,3 +21,4 @@ Route::resource('zones','ZonesController');
 
 Route::resource('categories','CategoriesController');
 
+Auth::routes();
