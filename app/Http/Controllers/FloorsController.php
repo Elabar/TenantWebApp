@@ -56,7 +56,7 @@ class FloorsController extends Controller
         $floorName = Floor::find($id)->name;
 
         $data = [
-            'tenants' => Tenant::where('zoneID',$id)->orderBy('name')->paginate(50),
+            'tenants' => Tenant::where('floorID',$id)->orderBy('name')->paginate(50),
             'title' => 'Tenants in ' . $floorName . ' floor'
         ];
 
