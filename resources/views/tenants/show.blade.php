@@ -3,11 +3,17 @@
 @section('content')
     <a href={{url()->previous()}} class="btn btn-default">Back</a>
     <h1>{{$tenant->name}}</h1>
-    <small>Updated on {{$tenant->updated_at}}</small>
+    
     <div>
-        We are located at {{$zoneName}},{{$floorName}} floor and our lot number is {{$tenant->lotNumber}}.
+        Zone: <a href='/zones/{{$tenant->zoneID}}'>{{$zoneName}}</a>
         <br>
-        We sell tons of {{$categoryName}}.
+        Floor: <a href='/floors/{{$tenant->floorID}}'>{{$floorName}} floor</a>
+        <br>
+        Lot Number: {{$tenant->lotNumber}}
+        <br>
+        Category: <a href='/categories/{{$tenant->categoryID}}'>{{$categoryName}}</a>
+        <br><br>
+        About us: {{$tenant->description}}
     </div>
 
     

@@ -3,6 +3,6 @@
 @section('content')
     <div class = "jumbotron text-center">
         <h1>{{$title}}</h1>
-        <p>This is Home page</p>
+        <p>Welcome to MegaMall</p>
     </div>
 @endsection
