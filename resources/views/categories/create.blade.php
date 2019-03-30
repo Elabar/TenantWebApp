@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create Tenant</h1>
+    <h1>Create Category</h1>
     {!! Form::open(['action' => 'CategoriesController@store','method' => 'POST' ]) !!}
         <div class="form-group">
             {{Form::label('name','Category Name')}}
