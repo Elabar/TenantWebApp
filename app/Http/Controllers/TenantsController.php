@@ -89,14 +89,9 @@ class TenantsController extends Controller
     {
         //
         $tenant = Tenant::find($id);
-        $data = [
-            'tenant' => Tenant::find($id),
-            'zoneName' => Zone::find($tenant->zoneID)->name,
-            'floorName' => Floor::find($tenant->floorID)->name,
-            'categoryName' => Category::find($tenant->categoryID)->name
-        ];
-        return view('tenants.show')->with($data);
+        return view('tenants.show')->with('tenant',$tenant);
         //return $data;
+        //return $tenant->Category->name;
     }
 
     /**

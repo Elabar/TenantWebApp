@@ -5,13 +5,13 @@
     <h1>{{$tenant->name}}</h1>
     
     <div>
-        Zone: <a href='/zones/{{$tenant->zoneID}}'>{{$zoneName}}</a>
+        Zone: <a href='/zones/{{$tenant->zoneID}}'>{{$tenant->Zone->name}}</a>
         <br>
-        Floor: <a href='/floors/{{$tenant->floorID}}'>{{$floorName}} floor</a>
+        Floor: <a href='/floors/{{$tenant->floorID}}'>{{$tenant->Floor->name}} floor</a>
         <br>
         Lot Number: {{$tenant->lotNumber}}
         <br>
-        Category: <a href='/categories/{{$tenant->categoryID}}'>{{$categoryName}}</a>
+        Category: <a href='/categories/{{$tenant->categoryID}}'>{{$tenant->Category->name}}</a>
         <br><br>
         About us: {{$tenant->description}}
     </div>

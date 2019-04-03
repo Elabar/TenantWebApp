@@ -12,14 +12,14 @@ class Tenant extends Model
     ];
 
     public function floor(){
-        return $this->belongsTo('App\Floor');
+        return $this->belongsTo('App\Floor','floorID','id');
     }
 
     public function zone(){
-        return $this->belongsTo('App\Zone');
+        return $this->belongsTo('App\Zone','zoneID','id');
     }
 
     public function category(){
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo('App\Category','categoryID','id');
     }
 }
